@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace Kata.TicTacToe
 {
@@ -12,8 +13,13 @@ namespace Kata.TicTacToe
             Console.Write(BoardFormatter.Format(board));
             Console.WriteLine(" ");
             Console.Write("Player 1 enter a coord x,y to place your X or enter 'q' to give up: ");
-            string userInput = Console.ReadLine();
-           
+            string[] userInput = Console.ReadLine().Split(new[] {","}, StringSplitOptions.RemoveEmptyEntries);
+            int x = int.Parse(userInput[0]);
+            int y = int.Parse(userInput[1]);
+            Console.WriteLine(x);
+            Console.WriteLine(y);
+            
+
         }
     }
 }

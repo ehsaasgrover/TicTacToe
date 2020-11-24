@@ -1,9 +1,5 @@
-*.swp
-*.*~
-project.lock.json
 .DS_Store
-*.pyc
-nupkg/
-
-#Rider
-.idea
+bin/
+obj/
+.idea/
+*.DotSettings.user
