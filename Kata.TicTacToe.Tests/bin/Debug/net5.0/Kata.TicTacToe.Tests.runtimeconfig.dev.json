@@ -1,0 +1,8 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+      "/Users/Ehsaas.Grover/.dotnet/store/|arch|/|tfm|",
+      "/Users/Ehsaas.Grover/.nuget/packages"
+    ]
+  }
+}

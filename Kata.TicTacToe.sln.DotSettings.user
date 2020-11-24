@@ -1,0 +1,18 @@
+﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=3a752241_002D02f8_002D4d9a_002D8ad2_002Db53ffbcee834/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="InitializeWithEmptyCells" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;TestAncestor&gt;
+    &lt;TestId&gt;xUnit::E4B11C63-81EA-4E86-91BD-1C6845E43DE4::.NETCoreApp,Version=v5.0::Kata.TicTacToe.Tests.BoardShould.InitializeWithEmptyCells&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::E4B11C63-81EA-4E86-91BD-1C6845E43DE4::.NETCoreApp,Version=v5.0::Kata.TicTacToe.Tests.BoardFormatterShould.FormatNineDotsGivenEmptyBoard&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::E4B11C63-81EA-4E86-91BD-1C6845E43DE4::.NETCoreApp,Version=v5.0::Kata.TicTacToe.Tests.BoardFormatterShould.FormatXInTopLeftCorner&lt;/TestId&gt;
+  &lt;/TestAncestor&gt;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=ac7a609a_002D6c78_002D4bdb_002D8724_002Da2f508b49528/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="InitializeWithEmptyCells #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;TestAncestor&gt;
+    &lt;TestId&gt;xUnit::E4B11C63-81EA-4E86-91BD-1C6845E43DE4::.NETCoreApp,Version=v5.0::Kata.TicTacToe.Tests.BoardShould.InitializeWithEmptyCells&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::E4B11C63-81EA-4E86-91BD-1C6845E43DE4::.NETCoreApp,Version=v5.0::Kata.TicTacToe.Tests.BoardFormatterShould.FormatXInTopLeftCorner&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::E4B11C63-81EA-4E86-91BD-1C6845E43DE4::.NETCoreApp,Version=v5.0::Kata.TicTacToe.Tests.BoardFormatterShould.FormatNineDotsGivenEmptyBoard&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::E4B11C63-81EA-4E86-91BD-1C6845E43DE4::.NETCoreApp,Version=v5.0::Kata.TicTacToe.Tests.BoardFormatterShould.FormatOInTopRightCorner&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::E4B11C63-81EA-4E86-91BD-1C6845E43DE4::.NETCoreApp,Version=v5.0::Kata.TicTacToe.Tests.BoardFormatterShould.CheckIfCellIsEmptyBeforeUserInput&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::E4B11C63-81EA-4E86-91BD-1C6845E43DE4::.NETCoreApp,Version=v5.0::Kata.TicTacToe.Tests.BoardFormatterShould&lt;/TestId&gt;
+  &lt;/TestAncestor&gt;
+&lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
