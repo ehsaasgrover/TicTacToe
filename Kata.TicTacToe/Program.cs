@@ -10,7 +10,7 @@ namespace Kata.TicTacToe
             Console.WriteLine("Here's my current board: ");
             Console.WriteLine(" ");
             Board board = new Board(3,3);
-            Console.Write(BoardFormatter.Format(board));
+            Console.WriteLine(BoardFormatter.Format(board));
             Console.WriteLine(" ");
             var IsPlayerOnesTurn = true;
             while (true)
@@ -27,10 +27,23 @@ namespace Kata.TicTacToe
                 }
 
                 var isValidInput = IsValidInput(userInput, board);
-                var cell = board.Cells.FirstOrDefault(c => c.X == x && c.Y == y);
-                if (cell != null) cell.Piece = IsPlayerOnesTurn ? BoardPiece.X : BoardPiece.O;
-                Console.Write(BoardFormatter.Format(board));
-                IsPlayerOnesTurn = !IsPlayerOnesTurn;
+                int x;
+                int y;
+                if (isValidInput)
+                {
+                    var stringCoords = userInput.Split(new[] {","}, StringSplitOptions.RemoveEmptyEntries);
+                    x = int.Parse(stringCoords[0]);
+                    y = int.Parse(stringCoords[1]);
+                    var cell = board.GetCell(x,y);
+                    if (cell != null) cell.Piece = IsPlayerOnesTurn ? BoardPiece.X : BoardPiece.O;
+                    Console.WriteLine(BoardFormatter.Format(board));
+                    Console.WriteLine("");
+                    IsPlayerOnesTurn = !IsPlayerOnesTurn;
+                    Console.WriteLine(board.GetCell(x,y));
+                    
+                }
+                else Console.WriteLine("Please enter a valid input!");
+                
             }
         }
 
@@ -45,9 +58,11 @@ namespace Kata.TicTacToe
             var isValidY = int.TryParse(stringCoords[1], out var y);
             if (!isValidY) return false;
             if (y < 0 || y > board.Height - 1) return false;
-            var cell = board.Cells.FirstOrDefault(c => c.X == x && c.Y == y);
+            var cell = board.GetCell(x, y);
             if (cell != null && cell.Piece != BoardPiece.Empty) return false;
             return true;
         }
+
+        
     }
 }

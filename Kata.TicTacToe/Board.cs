@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Kata.TicTacToe
 {
@@ -17,14 +18,20 @@ namespace Kata.TicTacToe
 
         private void InitializeCells()
         {
-            for (int x = 0; x < Width; x++)
+            for (var x = 0; x < Width; x++)
             {
-                for (int y = 0; y < Height; y++)
+                for (var y = 0; y < Height; y++)
                 {
                     var cell = new Cell {X = x, Y = y, Piece = BoardPiece.Empty};
                     Cells.Add(cell);
                 }
             }
+        }
+        
+        public Cell GetCell(int x, int y)        
+        {
+            var cell = Cells.FirstOrDefault(c => c.X == x && c.Y == y);
+            return cell;
         }
     }
 }

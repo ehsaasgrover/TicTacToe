@@ -23,7 +23,7 @@ namespace Kata.TicTacToe
 
         private static string FormatCell(Board board, int x, int y)
         {
-            var cell = board.Cells.FirstOrDefault(c => c.X == x && c.Y == y);
+            var cell = board.GetCell(x,y);
             if (cell != null && cell.Piece == BoardPiece.X)
             {
                 return "X";
