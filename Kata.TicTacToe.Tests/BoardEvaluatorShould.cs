@@ -49,6 +49,65 @@ namespace Kata.TicTacToe.Tests
             Assert.False(actual);
         }
 
+        [Fact]
+        public void ReturnWinWhenThreeSameCellPiecesAreHorizontal()
+        {
+            // Arrange
+            PopulateBoardWithThreeXsInARow();
+            // Act
+            var actual = _evaluator.HasWinCondition();
+            // Assert
+            Assert.True(actual);
+        }
+        
+        [Fact]
+        public void ReturnWinWhenThreeSameCellPiecesAreVertical()
+        {
+            // Arrange
+            _board.GetCell(1, 0).Piece = BoardPiece.X;
+            _board.GetCell(1, 1).Piece = BoardPiece.X;
+            _board.GetCell(1, 2).Piece = BoardPiece.X;
+            // Act
+            var actual = _evaluator.HasWinCondition();
+            // Assert
+            Assert.True(actual);
+        }
+
+        [Fact]
+        public void ReturnWinWhenCellsOfSamePieceAreDiagonal()
+        {
+            // Arrange
+            PopulateBoardWithThreeXsDiagonally();
+            // Act
+            var actual = _evaluator.HasWinCondition();
+            // Assert
+            Assert.True(actual);
+        }
+
+        private void PopulateBoardWithThreeXsInARow()
+        {
+            var y = _random.Next(_board.Height);
+            var piece = _random.Next(2) == 0 ? BoardPiece.X : BoardPiece.O;
+            for (var x = 0; x < _board.Width; x++)
+            {
+                _board.GetCell(x,y).Piece = piece;
+            }
+        }
+
+        private void PopulateBoardWithThreeXsDiagonally()
+        {
+            var piece = _random.Next(2) == 0 ? BoardPiece.X : BoardPiece.O;
+            for (var x = 0; x < _board.Width; x++)
+            {
+                _board.GetCell(x, x).Piece = piece;
+            }
+            
+            // Need to do negative diagonal
+            // _board.GetCell(2, 0).Piece = BoardPiece.X;
+            // _board.GetCell(1, 1).Piece = BoardPiece.X;
+            // _board.GetCell(0, 2).Piece = BoardPiece.X;
+        }
+        
         private void RandomlyPopulateBoardWithXsAndOs()
         {
             // foreach (var c in _board.Cells)

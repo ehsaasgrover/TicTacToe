@@ -5,6 +5,7 @@ namespace Kata.TicTacToe
     public class BoardEvaluator
     {
         private readonly Board _board;
+
         public BoardEvaluator(Board board)
         {
             _board = board;
@@ -20,8 +21,8 @@ namespace Kata.TicTacToe
             //     }
             // }
             // return true;
-            
-            //return !_board.Cells.Any(c => c.Piece == BoardPiece.Empty);
+
+            // return !_board.Cells.Any(c => c.Piece == BoardPiece.Empty);
 
             return _board.Cells.All(c => c.Piece != BoardPiece.Empty);
 
@@ -30,9 +31,87 @@ namespace Kata.TicTacToe
                 if (c.Piece == BoardPiece.Empty)
                 {
                     return false;
-                } 
+                }
             }
+
             return true;
         }
+        
+        public bool HasWinCondition()
+        {
+            return HasHorizontalWinCondition() || HasDiagonalWinCondition() || HasVerticalWinCondition();
+        }
+        
+        private bool HasHorizontalWinCondition()
+        {
+            // for (var i = 0; i < _board.Width; i++)
+            // {
+            //     if ((_board.GetCell(i, 0).Piece == BoardPiece.X) && (_board.GetCell(i + 1, 0).Piece == BoardPiece.X) &&
+            //         (_board.GetCell(i + 2, 0).Piece == BoardPiece.X)) return true;
+            // }
+            
+            for (var y = 0; y < _board.Height; y++)
+            {
+                var comparisonPiece = _board.GetCell(0, y).Piece;
+                for (var x = 0; x < _board.Width; x++)
+                {
+                    if (comparisonPiece != _board.GetCell(x, y).Piece) return false;
+                }
+            }
+            return false;
+        }
+
+        private bool HasDiagonalWinCondition()
+        {
+            var diagonalCells = BoardPiece.Empty;
+            for (var i = 0; i < _board.Width; i++)
+            {
+                diagonalCells = (_board.GetCell(i, i).Piece);
+            }
+
+            if (diagonalCells == BoardPiece.X)
+            {
+                return true;
+            }
+
+            if ((_board.GetCell(0, 2).Piece == BoardPiece.X) && (_board.GetCell(1, 1).Piece == BoardPiece.X) &&
+                (_board.GetCell(2, 0).Piece == BoardPiece.X))
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        private bool HasVerticalWinCondition()
+        {
+            for (var x = 0; x < _board.Width; x++)
+            {
+                var comparisonPiece = _board.GetCell(x, 0).Piece;
+                if (comparisonPiece == BoardPiece.Empty) continue;
+                var cellsInCurrentVertical = _board.Cells.Where(c => c.X == x);
+                var currentVerticalHasWinCondition = cellsInCurrentVertical.All(c => c.Piece == comparisonPiece);
+                if (currentVerticalHasWinCondition) return true;    
+            }
+            return false;
+            
+            // for (var x = 0; x < _board.Width; x++)
+            // {
+            //     var comparisonPiece = _board.GetCell(x, 0).Piece;
+            // if (comparisonPiece == BoardPiece.Empty) continue;
+            //     var verticalIsWinCondition = true;
+            //     for (var y = 1; y < _board.Height; y++)
+            //     {
+            //         if (comparisonPiece != _board.GetCell(x, y).Piece)
+            //         {
+            //             verticalIsWinCondition = false;
+            //             break;
+            //         }
+            //     }
+            //     if (verticalIsWinCondition) return true;
+            // }
+            // return false;
+        }
+        
     }
 }

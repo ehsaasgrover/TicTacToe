@@ -10,6 +10,7 @@ namespace Kata.TicTacToe
             Console.WriteLine("Here's my current board: ");
             Console.WriteLine(" ");
             Board board = new Board(3,3);
+            BoardEvaluator evaluator = new BoardEvaluator(board);
             Console.WriteLine(BoardFormatter.Format(board));
             Console.WriteLine(" ");
             var IsPlayerOnesTurn = true;
@@ -19,18 +20,19 @@ namespace Kata.TicTacToe
                 var piece = IsPlayerOnesTurn ? "X" : "O";
                 Console.Write($"Player {player} enter a coord x,y to place your {piece} or enter 'q' to give up: ");
                 var userInput = Console.ReadLine();
-                
                 if (userInput != null && userInput.Equals("q"))
                 {
                     Console.Write("Player has given up");
                     Environment.Exit(0);
                 }
-
                 var isValidInput = IsValidInput(userInput, board);
                 int x;
                 int y;
-                if (isValidInput)
+                if (!isValidInput)
                 {
+                    Console.WriteLine("Please enter a valid input!");
+                }
+                else {
                     var stringCoords = userInput.Split(new[] {","}, StringSplitOptions.RemoveEmptyEntries);
                     x = int.Parse(stringCoords[0]);
                     y = int.Parse(stringCoords[1]);
@@ -39,11 +41,17 @@ namespace Kata.TicTacToe
                     Console.WriteLine(BoardFormatter.Format(board));
                     Console.WriteLine("");
                     IsPlayerOnesTurn = !IsPlayerOnesTurn;
-                    Console.WriteLine(board.GetCell(x,y));
-                    
+                    if (evaluator.IsFull())
+                    {
+                        Console.WriteLine("Board is full. Game over");
+                        Environment.Exit(0);
+                    }
+                    if (evaluator.HasWinCondition())
+                    {
+                        Console.WriteLine("We have a winner!!");
+                        Environment.Exit(0);
+                    }
                 }
-                else Console.WriteLine("Please enter a valid input!");
-                
             }
         }
 
