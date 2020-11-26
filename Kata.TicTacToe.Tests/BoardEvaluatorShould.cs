@@ -53,7 +53,7 @@ namespace Kata.TicTacToe.Tests
         public void ReturnWinWhenThreeSameCellPiecesAreHorizontal()
         {
             // Arrange
-            PopulateBoardWithThreeXsInARow();
+            PopulateBoardWithAllSamePiecesInARow();
             // Act
             var actual = _evaluator.HasWinCondition();
             // Assert
@@ -64,9 +64,7 @@ namespace Kata.TicTacToe.Tests
         public void ReturnWinWhenThreeSameCellPiecesAreVertical()
         {
             // Arrange
-            _board.GetCell(1, 0).Piece = BoardPiece.X;
-            _board.GetCell(1, 1).Piece = BoardPiece.X;
-            _board.GetCell(1, 2).Piece = BoardPiece.X;
+            PopulateBoardWithAllSamePiecesInAColumn();
             // Act
             var actual = _evaluator.HasWinCondition();
             // Assert
@@ -84,11 +82,21 @@ namespace Kata.TicTacToe.Tests
             Assert.True(actual);
         }
 
-        private void PopulateBoardWithThreeXsInARow()
+        private void PopulateBoardWithAllSamePiecesInARow()
         {
             var y = _random.Next(_board.Height);
             var piece = _random.Next(2) == 0 ? BoardPiece.X : BoardPiece.O;
             for (var x = 0; x < _board.Width; x++)
+            {
+                _board.GetCell(x,y).Piece = piece;
+            }
+        }
+            
+        private void PopulateBoardWithAllSamePiecesInAColumn()
+        {
+            var x = _random.Next(_board.Width);
+            var piece = _random.Next(2) == 0 ? BoardPiece.X : BoardPiece.O;
+            for (var y = 0; y < _board.Height; y++)
             {
                 _board.GetCell(x,y).Piece = piece;
             }
