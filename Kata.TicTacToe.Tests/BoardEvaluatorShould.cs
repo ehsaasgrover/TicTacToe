@@ -72,15 +72,29 @@ namespace Kata.TicTacToe.Tests
         }
 
         [Fact]
-        public void ReturnWinWhenCellsOfSamePieceAreDiagonal()
+        public void ReturnWinWhenCellsOfSamePieceAreNegativeDiagonal()
         {
             // Arrange
-            PopulateBoardWithThreeXsDiagonally();
+            PopulateBoardWithThreeXsWithNegativeGradient();
             // Act
             var actual = _evaluator.HasWinCondition();
             // Assert
             Assert.True(actual);
-        }
+        } 
+        
+        [Fact]
+        public void ReturnWinWhenCellsOfSamePieceArePositiveDiagonal()
+        {
+            // Arrange
+            PopulateBoardWithThreeXsWithPositiveGradient();
+            // _board.GetCell(2, 0).Piece = BoardPiece.X;
+            // _board.GetCell(1, 1).Piece = BoardPiece.X;
+            // _board.GetCell(0, 2).Piece = BoardPiece.X;
+            // Act
+            var actual = _evaluator.HasWinCondition();
+            // Assert
+            Assert.True(actual);
+        }    
 
         private void PopulateBoardWithAllSamePiecesInARow()
         {
@@ -102,18 +116,22 @@ namespace Kata.TicTacToe.Tests
             }
         }
 
-        private void PopulateBoardWithThreeXsDiagonally()
+        private void PopulateBoardWithThreeXsWithPositiveGradient()
+        {
+            var piece = _random.Next(2) == 0 ? BoardPiece.X : BoardPiece.O;
+            for (var x = 0; x < _board.Width; x++)
+            {
+                _board.GetCell(x, (_board.Width - 1) - x).Piece = piece;
+            }
+        }
+
+        private void PopulateBoardWithThreeXsWithNegativeGradient()
         {
             var piece = _random.Next(2) == 0 ? BoardPiece.X : BoardPiece.O;
             for (var x = 0; x < _board.Width; x++)
             {
                 _board.GetCell(x, x).Piece = piece;
             }
-            
-            // Need to do negative diagonal
-            // _board.GetCell(2, 0).Piece = BoardPiece.X;
-            // _board.GetCell(1, 1).Piece = BoardPiece.X;
-            // _board.GetCell(0, 2).Piece = BoardPiece.X;
         }
         
         private void RandomlyPopulateBoardWithXsAndOs()

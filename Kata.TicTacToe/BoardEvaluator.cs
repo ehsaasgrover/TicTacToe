@@ -1,4 +1,6 @@
+using System;
 using System.Linq;
+using System.Net;
 
 namespace Kata.TicTacToe
 {
@@ -44,43 +46,56 @@ namespace Kata.TicTacToe
         
         private bool HasHorizontalWinCondition()
         {
-            // for (var i = 0; i < _board.Width; i++)
-            // {
-            //     if ((_board.GetCell(i, 0).Piece == BoardPiece.X) && (_board.GetCell(i + 1, 0).Piece == BoardPiece.X) &&
-            //         (_board.GetCell(i + 2, 0).Piece == BoardPiece.X)) return true;
-            // }
-            
             for (var y = 0; y < _board.Height; y++)
             {
                 var comparisonPiece = _board.GetCell(0, y).Piece;
-                for (var x = 0; x < _board.Width; x++)
-                {
-                    if (comparisonPiece != _board.GetCell(x, y).Piece) return false;
-                }
+                if (comparisonPiece == BoardPiece.Empty) continue;
+                var cellsInCurrentHorizontal = _board.Cells.Where(c => c.Y == y);
+                var currentHorizontalHasWinCondition = cellsInCurrentHorizontal.All(c => c.Piece == comparisonPiece);
+                if (currentHorizontalHasWinCondition) return true;
             }
             return false;
         }
 
         private bool HasDiagonalWinCondition()
         {
-            var diagonalCells = BoardPiece.Empty;
-            for (var i = 0; i < _board.Width; i++)
-            {
-                diagonalCells = (_board.GetCell(i, i).Piece);
-            }
+            return HasDiagonalWinConditionBottomLeftToTopRight() || HasDiagonalWinConditionTopLeftToBottomRight();
+        }
+        
+        
+        private bool HasDiagonalWinConditionTopLeftToBottomRight()
+        {
+            var comparisonPiece = _board.GetCell(0,0).Piece;
+            if (comparisonPiece == BoardPiece.Empty) return false;
+            var cellsInDiagonal = _board.Cells.Where(c => c.Y == c.X);
+            var diagonalHasWinCondition = cellsInDiagonal.All(c => c.Piece == comparisonPiece);
+            return diagonalHasWinCondition;
 
-            if (diagonalCells == BoardPiece.X)
-            {
-                return true;
-            }
+            // if ((_board.GetCell(0, 0).Piece == BoardPiece.X) && (_board.GetCell(1, 1).Piece == BoardPiece.X) &&
+            //     (_board.GetCell(2, 2).Piece == BoardPiece.X))
+            // {
+            //     return true;
+            // }
+            //
+            // return false;
+        }
 
-            if ((_board.GetCell(0, 2).Piece == BoardPiece.X) && (_board.GetCell(1, 1).Piece == BoardPiece.X) &&
-                (_board.GetCell(2, 0).Piece == BoardPiece.X))
-            {
-                return true;
-            }
-
-            return false;
+        private bool HasDiagonalWinConditionBottomLeftToTopRight()
+        {
+            var comparisonPiece = _board.GetCell(0,_board.Height-1).Piece;
+            if (comparisonPiece == BoardPiece.Empty) return false;
+            var cellsInDiagonal = _board.Cells.Where(c => c.Y == _board.Width - 1 - c.X);
+            var diagonalHasWinCondition = cellsInDiagonal.All(c => c.Piece == comparisonPiece);
+            return diagonalHasWinCondition;
+            // for (var x = 0; x < _board.Width; x++)
+            // {
+            //     = _board.GetCell(x, (_board.Width - 1) - x).Piece;
+            // }
+            // if (diagonalCells == piece)
+            // {
+            //     return true;
+            // }
+            // return false;
         }
 
         private bool HasVerticalWinCondition()
