@@ -43,9 +43,9 @@ namespace Kata.TicTacToe.Tests
             // Arrange
             var index = _random.Next(_board.Cells.Count);
             _board.Cells[index].Piece = _random.Next(2) == 0 ? BoardPiece.X : BoardPiece.O; 
-            //Act
+            // Act
             var actual = _evaluator.IsFull();
-            //Assert
+            // Assert
             Assert.False(actual);
         }
 
@@ -75,7 +75,7 @@ namespace Kata.TicTacToe.Tests
         public void ReturnWinWhenCellsOfSamePieceAreNegativeDiagonal()
         {
             // Arrange
-            PopulateBoardWithThreeXsWithNegativeGradient();
+            PopulateBoardWithSameCellsInNegativeGradient();
             // Act
             var actual = _evaluator.HasWinCondition();
             // Assert
@@ -86,10 +86,7 @@ namespace Kata.TicTacToe.Tests
         public void ReturnWinWhenCellsOfSamePieceArePositiveDiagonal()
         {
             // Arrange
-            PopulateBoardWithThreeXsWithPositiveGradient();
-            // _board.GetCell(2, 0).Piece = BoardPiece.X;
-            // _board.GetCell(1, 1).Piece = BoardPiece.X;
-            // _board.GetCell(0, 2).Piece = BoardPiece.X;
+            PopulateBoardWithSameCellsInPositiveGradient();
             // Act
             var actual = _evaluator.HasWinCondition();
             // Assert
@@ -116,7 +113,7 @@ namespace Kata.TicTacToe.Tests
             }
         }
 
-        private void PopulateBoardWithThreeXsWithPositiveGradient()
+        private void PopulateBoardWithSameCellsInPositiveGradient()
         {
             var piece = _random.Next(2) == 0 ? BoardPiece.X : BoardPiece.O;
             for (var x = 0; x < _board.Width; x++)
@@ -125,7 +122,7 @@ namespace Kata.TicTacToe.Tests
             }
         }
 
-        private void PopulateBoardWithThreeXsWithNegativeGradient()
+        private void PopulateBoardWithSameCellsInNegativeGradient()
         {
             var piece = _random.Next(2) == 0 ? BoardPiece.X : BoardPiece.O;
             for (var x = 0; x < _board.Width; x++)
@@ -136,17 +133,6 @@ namespace Kata.TicTacToe.Tests
         
         private void RandomlyPopulateBoardWithXsAndOs()
         {
-            // foreach (var c in _board.Cells)
-            // {
-            //     var rand = new Random().Next(0,1);
-            //     c.Piece = rand == 0 ? BoardPiece.X : BoardPiece.O;
-            // }
-            
-            // for (var i = 0; i < _board.Cells.Count; i++)
-            // {
-            //     var rand = new Random().Next(0,1);
-            //     _board.Cells[i].Piece = rand == 0 ? BoardPiece.X : BoardPiece.O;  
-            // }
             _board.Cells.ForEach(c => c.Piece = _random.Next(2) == 0 ? BoardPiece.X : BoardPiece.O);    
         }
     }
